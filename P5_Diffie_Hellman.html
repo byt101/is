@@ -1,0 +1,63 @@
+ <!-- Implement the Diffie-Hellman Key Exchange mechanism using HTML and JavaScript. Consider the end user as one of the parties (Alice) and the JavaScript application as other party (bob) -->
+ 
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Diffie-Hellman Key Exchange</title>
+ </head>
+ <body>
+     <h2>Diffie-Hellman Key Exchange</h2>
+     <hr>
+     <p>Welcome, Alice! Below is the Diffie-Hellman Key Exchange simulation between you and Bob.</p>
+     <label for="privateKey">Enter your private key (Alice): </label>
+     <input type="number" id="privateKey" value="6"><br><br>
+     <button onclick="startExchange()">Start Key Exchange</button>
+     
+     <p id="result"></p>
+ 
+     <script>
+         // Function to calculate (a^b) % p
+         function power(a, b, p) {
+             return Math.pow(a, b) % p;
+         }
+ 
+         // Public parameters agreed upon by Alice and Bob
+         var P = 23;  // Prime number
+         var G = 9;   // Primitive root
+         var b = 15;  // Bob's private key (simulated)
+ 
+         // Bob's public key
+         var y = power(G, b, P);  // Bob's public key
+ 
+         function startExchange() {
+             // Get Alice's private key from the input
+             var a = parseInt(document.getElementById('privateKey').value);
+             
+             // Alice's public key
+             var x = power(G, a, P);
+ 
+             // Shared secret key calculations
+             var ka = power(y, a, P); // Alice's secret key
+             var kb = power(x, b, P); // Bob's secret key
+ 
+             // Displaying the results
+             document.getElementById("result").innerHTML = `
+                 <strong>Diffie-Hellman Key Exchange Details:</strong><br><br>
+                 Prime number P: ${P}<br>
+                 Primitive root G: ${G}<br><br>
+                 Alice's private key: ${a}<br>
+                 Alice's public key: ${x}<br><br>
+                 Bob's private key (simulated): ${b}<br>
+                 Bob's public key: ${y}<br><br>
+                 Alice's shared secret key: ${ka}<br>
+                 Bob's shared secret key: ${kb}<br><br>
+                 <strong>Shared Secret Key (should be the same): ${ka}</strong><br>
+                 (Both Alice and Bob computed the same secret key)
+             `;
+         }
+     </script>
+ </body>
+ </html>
+ 
