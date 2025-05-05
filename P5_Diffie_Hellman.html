@@ -1,4 +1,4 @@
- <!-- Implement the Diffie-Hellman Key Exchange mechanism using HTML and JavaScript. Consider the end user as one of the parties (Alice) and the JavaScript application as other party (bob) -->
+<!-- Implement the Diffie-Hellman Key Exchange mechanism using HTML and JavaScript. Consider the end user as one of the parties (Alice) and the JavaScript application as other party (bob) -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,17 +16,26 @@
     <script>
         // Function to calculate (a^b) % p
         function power(a, b, p) {
-            return Math.pow(a, b) % p;
+            let r = 1;
+            while (b > 0) {
+                if (b % 2) r = r * a % p;
+                a = a * a % p;
+                b = Math.floor(b / 2);
+            }
+            return r;
         }
+
+
         function startExchange() {
             // Public parameters agreed upon by Alice and Bob
             var P = 23;  // Prime number
             var G = 9;   // Primitive root
+
             var b = 15;  // Bob's private key 
-            var a = 25;  // Alice's private key
+            var a = 30;  // Alice's private key
 
             // Bob's public key
-            var y = power(G, b, P);  // Bob's public key
+            var y = power(G, b, P);
 
             // Alice's public key
             var x = power(G, a, P);
