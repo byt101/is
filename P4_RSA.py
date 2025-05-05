@@ -54,3 +54,16 @@ print("Decrypted Message:", decrypted_message)
 
 
 # I/P : 17, 11, hi/hello
+
+# Formula :
+
+# Encryption
+# C = (P ^ e) mod n
+
+# Decryption
+# P = (C ^ d) mod n
+
+
+# n = p × q --To calculate n
+# phi = (p - 1) × (q - 1) --To calculate phi
+# (d × e) mod phi = 1 --To calculate d 
